@@ -5,6 +5,17 @@ import InputTodo from "./InputTodos"
 import { v4 as uuidv4 } from "uuid";
 class TodoContainer extends React.Component {
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.title = updatedTitle
+        }
+        return todo
+      })
+    })
+  }
+
   deleteTodo = id => {
     this.setState(prevState => ({
       todos: [...prevState.todos.filter(todo => todo.id !== id)]
@@ -63,11 +74,14 @@ class TodoContainer extends React.Component {
       <div className="container">
         <div className="inner">
           <Header />
-          <InputTodo addTodoProps={this.addTodo}/>
+          <InputTodo
+            addTodoProps={this.addTodo}
+          />
           <TodosList
             todos={this.state.todos}
             handleChangeProps={this.handleChange}
-            deleteTodoProps = {this.deleteTodo}
+            deleteTodoProps={this.deleteTodo}
+            setUpdateProps={this.setUpdate}
           />
         </div>
       </div>
