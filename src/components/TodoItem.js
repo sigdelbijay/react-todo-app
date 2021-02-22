@@ -15,6 +15,10 @@ class TodoItem extends React.Component {
       this.setState({editing: false})
     }
   }
+
+  componentWillUnmount() {
+    console.log("Cleaning up...")
+  }
   
   render() {
     let viewMode = {}
